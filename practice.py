@@ -1,4 +1,6 @@
 
+
+
 # Book Store
 """
 - were gonna make a book store using while loops
@@ -105,7 +107,8 @@ while running:
         again = input('Exit? (y/n): ')
 
         if again == "y":
-            books.clear() and total = 0
+            books.clear() and total - total
+            print("Thankyou for your interest!!")
             print("Thankyouu for choosing our book store!!")
             running = False
 
