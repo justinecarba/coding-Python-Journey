@@ -1162,6 +1162,7 @@ while running:
 
 history = []
 history1 = []
+
 running = True
 
 while running:
@@ -1361,3 +1362,464 @@ if __name__ == "__main__":
 # to be continued...........
 
 
+""" 
+import random
+import numpy as np
+
+list = ["*", "/", "|"]
+
+comp = random.choice(list)
+
+comp = comp * 5 
+
+for i in comp:
+    for j in i:
+        for word in j:
+            print(j + i, end=" ")   
+            print(word)  
+
+            """
+
+# Calculator
+"""
+- Calculate
+- Exit
+"""
+import os
+import time
+
+first_number = ""
+operator = ""
+second_number = ""
+screen = ""
+pattern = {
+    1 : ["┌───┐", "│ * │", "└───┘"],
+    2 : ["┌───┐", "│ / │", "└───┘"],
+    3 : ["┌───┐", "│ + │", "└───┘"],
+    4 : ["┌───┐", "│ - │", "└───┘"]
+}
+
+number = ["  1 "," 2 "," 3  ","4"]
+number1= ["  5  ", "6", "  7  ", "8"]
+number2 =[ "  9  ", "0", "  =  ", "E"]
+#pattern = ([[["|", ]]])
+
+symbols = []
+running = True
+
+print("Calculator will start in.............")
+def timer(start, end):
+    for x in range(start, end + 1):
+        print(x)
+        time.sleep(1)
+
+    timer(0, 3)
+
+
+while running:
+
+        os.system("cls")
+
+        print()
+        print("********************")
+        print("     CALCULATOR     ")        
+        print("********************")
+        print("┌──────────────────┐")
+        print(f"│{screen:<18}│")
+        print("└──────────────────┘")
+        print()
+
+        for i in range(3):
+            for value in pattern.values():
+                print(value[i], end="")
+            print()
+
+        for i in number:
+            print(i, end = "  ")
+        print()      
+
+        for i in number1:
+            print(i, end="  ")
+        print()
+
+        for i in number2:
+            print(i, end="  ")
+        print()
+
+        choice = input("\nPress a button: ").upper()
+
+        if choice.isdigit():
+            screen += choice
+
+            if operator == "":
+                first_number += choice
+            else:
+                second_number += choice
+
+        elif choice in ["*", "/", "+", "-"]:
+            if first_number == "":
+                print("Enter first number!!")
+
+            elif operator != "":
+                print("Operator already selected!!")
+
+            else:
+                operator = choice
+                screen += choice
+
+        elif choice == "=":
+            if first_number == "" or operator == "" or second_number == "":
+                print("ERROR!!")
+            else:
+                first_number = int(first_number)
+                second_number = int(second_number)
+
+                if operator == "*":
+                    result = first_number * second_number
+                elif operator == "/":
+                    if second_number == 0:
+                        print("ERROR: Division by zero is not allowed!!")
+                        result = "Undefined"
+                    else:
+                        result = first_number / second_number
+                elif operator == "+":
+                    result = first_number + second_number
+                elif operator == "-":
+                    result = first_number - second_number
+
+                screen = str(result)
+                print(f"Result: {result}")
+                first_number = str(result)
+                operator = ""
+                second_number = ""
+
+        elif choice == "X":
+            screen = ""
+            first_number = ""
+            operator = ""
+            second_number = ""
+
+        elif choice == "E":
+            running = False
+
+        else:
+            print("ERROR!!")
+
+
+"""
+Student Management System
+
+"""
+
+# Student Management System
+
+"""
+- log in as a student or teacher
+- add student
+- enter grade
+- find average
+- category
+- extra find low and high score
+"""
+
+import pandas as pd
+
+student_list = {
+    "Student" : ["name"],
+    "Math" : [99],
+    "English" : [98],
+    "Science" : [96],
+    "Grades" : [98.50],
+    "Category" : ["Passed"],
+    "Highest" : [99],
+    "Lowest"  : [96]
+}
+
+
+
+def log_in():
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+    position = input("Student or Teacher: ")
+
+    if username == "" or password == "":
+        print("Invalid Username/Password!!")
+
+    elif len(username) > 14 and len(password) > 14:
+        print("Username/Password must not be more than 14 characters!!")
+
+    elif position != "Teacher" and position == "Student":
+        print("This program is for teacher only!!")
+
+    else:
+        print("\n==================YOUR ACCOUNT======================")
+        print(f"Welcome to Student Management System : {username}!!")
+        print(f"Your password : {password}")
+        print(f"Position : {position}")
+        print("====================================================")
+
+
+
+def add_student():
+    result = pd.DataFrame(student_list)
+    print("\n=================YOUR MANAGEMENT LIST=====================")
+    print("Guide List : ")
+    print(result)
+    print("============================================================\n")
+        
+    while True:
+        add_student = input("Enter student name (press s to stop): ").strip()
+
+        if add_student.isdigit():
+            print("Name must be letters!!")
+
+        elif add_student == "s":
+            break
+
+        else:
+            print("Student added sucessfully!!")
+            while True:
+                try:
+                    math_grade = input("Enter math grade : ")
+
+                    if not math_grade.isdigit():
+                        print("Grade should be numbers!!")
+                        continue
+
+                    elif math_grade == "":
+                        print("You haven't entered yet!!")
+                        continue
+
+                    elif int(math_grade) < 0 or int(math_grade) > 100:
+                        print("Grade should be between 0 and 100!!")
+                        continue
+
+                    else:
+                        print("Math grade added sucessfully!!")
+                        break
+
+                except ValueError:
+                    print("Invalid input. Please enter a valid number for the math grade.")
+
+            while True:
+                try:
+                    english_grade = input("Enter english grade : ")
+
+                    if not english_grade.isdigit():
+                        print("Grade should be numbers!!")
+                        continue
+
+                    elif english_grade == "":
+                        print("You haven't entered yet!!")
+                        continue
+
+                    elif int(english_grade) < 0 or int(english_grade) > 100:
+                        print("Grade should be between 0 and 100!!")
+                        continue
+
+                    else:
+                        print("English grade added sucessfully!!")
+                        break
+                except ValueError:
+                    print("Invalid input. Please enter a valid number for the english grade.")
+
+            
+
+                    print("Added sucessfuly!!")
+
+            while True: 
+                try:
+                    
+                    science_grade = input("Enter science grade : ")
+
+                    if not science_grade.isdigit():
+                        print("Grade should be numbers!!")
+                        continue
+
+                    elif science_grade == "":
+                        print("You haven't entered yet!!")
+                        continue
+
+                    elif int(science_grade) < 0 or int(science_grade) > 100:
+                        print("Grade should be between 0 and 100!!")
+                        continue
+
+                    else:
+                        print("Science grade added sucessfully!!")
+                        break
+                except ValueError:
+                    print("Invalid input. Please enter a valid number for the science grade.")
+
+            # Average
+
+            print("Math Grade : ", math_grade)
+            print("English Grade : ", english_grade)
+            print("Science Grade : ", science_grade)
+
+            average = (
+                int(math_grade) +
+                int(english_grade) +
+                int(science_grade)
+            ) / 3
+
+            print(f"Average : {average:.2f}")
+
+            # Category
+            if average >= 95:
+                category = "Excellent"
+                print(f"Category : {category}")
+                print("Student Passed!!")
+
+            elif average >= 90:
+                category = "Very Good"
+                print(f"Category : {category}")
+                print("Student Passed!")
+
+            elif average >= 80:
+                category = "Good"
+                print(f"Category : {category}")
+                print("Student Passed!!")
+
+            elif average >= 75:
+                category = "Fair"
+                print(f"Category : {category}")
+                print("Student Passed!!")
+
+            else:
+                category = "Poor"
+                print(f"Category : {category}")
+                print("Student Failed!!")
+
+            # High and Low Grades
+            high = max(math_grade, english_grade, science_grade)
+            low = min(math_grade, english_grade, science_grade)
+
+            print(f"High : {high}")
+            print(f"Low : {low}")
+
+            # Add Student to List
+            student_list["Student"].append(add_student)
+            student_list["Math"].append(int(math_grade))
+            student_list["English"].append(int(english_grade))
+            student_list["Science"].append(int(science_grade))
+            student_list["Grades"].append(average)
+            student_list["Category"].append(category)
+            student_list["Highest"].append(high)
+            student_list["Lowest"].append(low)
+
+            print("Student Added Sucessfully!!")
+
+def search_student():
+    result = pd.DataFrame(student_list)
+    print("\n=================YOUR MANAGEMENT LIST=====================")
+    print("Guide List : ")
+    print(result)
+    print("============================================================\n")
+
+    while True:
+        search_student = input("Enter student name to search (press s to stop): ").strip()
+
+        if search_student.isdigit():
+            print("Name must be letters!!")
+
+        elif search_student == "s":
+            break
+
+        elif search_student not in student_list["Student"]:
+            print("Student not found!!")
+
+        else:
+            index = student_list["Student"].index(search_student)
+            math_grade = student_list["Math"][index]
+            english_grade = student_list["English"][index]
+            science_grade = student_list["Science"][index]
+            average_grade = (math_grade + english_grade + science_grade) / 3
+            print(f"Student: {search_student}")
+            print(f"Math Grade: {math_grade}")
+            print(f"English Grade: {english_grade}")
+            print(f"Science Grade: {science_grade}")
+            print(f"Average Grade: {average_grade}")
+            print(f"Category: {student_list['Category'][index]}")
+
+def delete_student():
+    result = pd.DataFrame(student_list)
+    print("\n=================YOUR MANAGEMENT LIST=====================")
+    print("Guide List : ")
+    print(result)
+    print("============================================================\n")
+
+    while True:
+        delete_student = input("Enter student name to delete (press s to stop): ").strip()
+
+        if delete_student.isdigit():
+            print("Name must be letters!!")
+
+        elif delete_student == "s":
+            break
+
+        elif delete_student not in student_list["Student"]:
+            print("Student not found!!")
+
+        else:
+            index = student_list["Student"].index(delete_student)
+    
+            for key in student_list.keys():
+                student_list[key].pop(index)
+            print(f"Student {delete_student} list deleted successfully!!")
+
+def view_list():
+    print("\n=====================YOUR MANAGEMENT SYSTEM PROGRAM======================")
+    result = pd.DataFrame(student_list)
+    print(result)
+    print("==========================================================================")
+
+def exit():
+    while True:
+        again = input("Are you sure you want to exit? (y/n): ").lower()
+        if again == "y":
+            print("Exiting the program...")
+            global running
+            running = False
+            break
+
+        elif again == "n":
+            continue
+
+
+running  = True
+
+while running:
+    print("\n=================STUDENT MANAGEMENT SYSTEM=====================")
+    print("1. Log in")
+    print("2. Add Student")
+    print("3. Search Student")
+    print("4. delete Student")
+    print("5. View Management List")
+    print("6. Exit")
+
+    choice = input("Enter your choice (1-6): ")
+
+    if choice == "1":
+        log_in()
+
+    elif choice == "2":
+        add_student()
+
+    elif choice == "3":
+        search_student()
+
+    elif choice == "4":
+        delete_student()
+
+    elif choice == "5":
+        view_list()
+
+    elif choice == "6":
+        exit()
+
+
+
+
+
+
+    
