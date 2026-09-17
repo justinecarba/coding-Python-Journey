@@ -1,0 +1,372 @@
+this is a file which i've been imported using numpy
+
+
+
+
+
+
+import random
+import datetime
+
+# ==============================
+# JUSTINE AI CHATBOT
+# ==============================
+
+BOT_NAME = "Justine AI"
+
+responses = {
+    "hello": [
+        "Hello! 👋",
+        "Hi there!",
+        "Hey! Nice to see you!"
+    ],
+    "hi": [
+        "Hello!",
+        "Hi!",
+        "Hey!"
+    ],
+    "good morning": [
+        "Good morning! Have an amazing day! ☀️"
+    ],
+    "good afternoon": [
+        "Good afternoon! 😊"
+    ],
+    "good evening": [
+        "Good evening! Hope you're doing well!"
+    ],
+    "how are you": [
+        "I'm doing great! Thanks for asking.",
+        "I'm always ready to help!",
+        "I'm feeling awesome today!"
+    ],
+    "who are you": [
+        "I'm Justine AI, your Python chatbot."
+    ],
+    "what is your name": [
+        "My name is Justine AI."
+    ],
+    "who made you?": [
+        "I was created by Justine using Python!"
+    ],
+    "are you ai?": [
+        "Yes! I'm an AI chatbot."
+    ],
+    "thank you": [
+        "You're welcome!",
+        "Happy to help!",
+        "Anytime!"
+    ],
+    "bye": [
+        "Goodbye! Have a wonderful day!",
+        "See you next time!",
+        "Take care!"
+    ]
+}
+
+
+def chatbot(message):
+    message = message.lower().strip()
+
+    # Dictionary responses
+    if message in responses:
+        return random.choice(responses[message])
+
+    # Time
+    elif "time" in message:
+        current = datetime.datetime.now().strftime("%I:%M %p")
+        return f"The current time is {current}."
+
+    # Date
+    elif "date" in message:
+        today = datetime.datetime.now().strftime("%B %d, %Y")
+        return f"Today's date is {today}."
+
+    # Math
+    elif message.startswith("calculate "):
+        try:
+            expression = message.replace("calculate ", "")
+            answer = eval(expression)
+            return f"The answer is {answer}"
+        except:
+            return "Sorry, I couldn't calculate that."
+
+    # Name memory
+    elif message.startswith("my name is"):
+        name = message.replace("my name is", "").strip().title()
+        return f"Nice to meet you, {name}! I'll remember your name during this chat."
+
+    # Joke
+    elif "joke" in message:
+        jokes = [
+            "Why do programmers prefer dark mode? Because light attracts bugs!",
+            "Why did Python break up with Java? Because Java had too many classes!",
+            "Debugging: Being the detective in a crime movie where you're also the criminal."
+        ]
+        return random.choice(jokes)
+
+    # Favorite language
+    elif "favorite programming language" in message:
+        return "Definitely Python! It's simple and powerful."
+
+    else:
+        return "Sorry, I don't understand that. Can you ask something else?"
+
+
+# ==============================
+# MENU
+# ==============================
+
+opened = False
+
+while True:
+
+    print("\n========== JUSTINE AI ==========")
+    print("1. Open AI")
+    print("2. Chat AI")
+    print("3. About")
+    print("4. Exit")
+
+    choice = input("Choose (1-4): ")
+
+    if choice == "1":
+        opened = True
+        print("\nJustine AI is now ONLINE!")
+        print("Type 'q' anytime to stop chatting.")
+
+    elif choice == "2":
+
+        if not opened:
+            print("Please open the AI first.")
+            continue
+
+        print(f"\n{BOT_NAME}: Hello! I'm ready to chat.")
+
+        while True:
+
+            user = input("You: ")
+
+            if user.lower() == "q":
+                print(f"{BOT_NAME}: Chat ended.")
+                break
+
+            response = chatbot(user)
+            print(f"{BOT_NAME}: {response}")
+
+    elif choice == "3":
+        print("\n========== ABOUT ==========")
+        print("Name :", BOT_NAME)
+        print("Version : 2.0")
+        print("Developer : Justine")
+        print("Language : Python")
+        print("Features:")
+        print("- Greetings")
+        print("- Random responses")
+        print("- Time & Date")
+        print("- Calculator")
+        print("- Jokes")
+        print("- Continuous conversation")
+
+    elif choice == "4":
+        print("Goodbye! Thanks for using Justine AI.")
+        break
+
+    else:
+        print("Invalid choice.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+So, today im gonna revise my roadmap in this python
+"""
+
+# Basic Syntax
+
+"""
+- print
+- comments(#)
+- Identation
+- input(
+"""
+
+#1 print syntax
+print("Hello World!!")
+
+# this is comments
+"""
+This is also a comments!
+"""
+
+# Were gonna put them into one like variables
+
+name = input("Enter your name: ")
+
+# Were gonna reacall your name
+
+print("Hello", name)
+
+# Variables and Data Types
+# str - name or what
+# int = whole numbers
+# float = for decimal
+# boolean=  for True o False
+# Ex:
+
+name = "Justine"   # This is str
+age = 17           # This is int
+height = 5.9       # This is float
+is_student = True  # This is Boolean
+
+"""
+However, we can put some project using this simple varibles
+"""
+# User Information project
+
+user_name = input("Enter your username: ")
+age = input("Enter your age: ")
+height = input("Enter your height: ")
+is_student = True
+
+print("=====USER INFORMATION=======")
+print(f"User Name: {user_name}")
+print(f"Age: {age}")
+print(f"Height: {height}")
+print(f"Student: {is_student}")
+
+"""
+However, we can also use if, elif, else function in boolean variables
+"""
+
+
+school = input("Enter is IT really worth it (True or False): ")
+
+if school == " ":
+    print("You haven't entered yet!!")
+elif school == "True":
+    print("Study hard and it will be worth it bro!!")
+else:
+    print("Stop already bro!!")
+
+# Conditionals 
+"""
+- if
+- elif
+- else
+"""
+
+# In conditionals we can use a lot in variables like str, int, float, or either boolean.
+
+# either that's basic so let's short cut though
+
+age = 17
+
+if age >= 18:
+    print("Adult!")
+else:
+    print("Minor!")
+    # Yup just like that it's very basic
+
+# Loops
+"""
+- While
+- for
+- break
+- continue
+"""
+
+# Loops can use many variables like this it's very helpful when making project!
+
+# While Loops
+
+food = input("Enter the food you want (q to quit): ")
+
+while True:
+    if food == "q":
+        print("Goodbye!")
+        break
+    else:
+        continue
+
+# for Loops
+
+for i in range(1, 6):
+    print(i)
+
+# Break and continue i already use it in while loops
+# break for stop 
+# continue for continuation 
+
+# Type Casting
+"""
+- int()
+- float()
+- str()
+- bool()
+"""
+# Type casting is the process of converting one data type to another.
+# For example, we can convert a string to an integer or a float to a string.
+# Example of type casting
+age = input("Enter your age: ")
+age = int(age)  # This is type casting from string to integer
+print(f"You are {age} years old.")
+
+# i'm gonna use some project here to be better my skills here in python
+"""
+for ex, we will make some vowel count here
+"""
+# Vowel Count
+
+name = (input("Enter your name to count how many vowels in your name: "))
+
+
+count = 0
+
+vowels = "AEIOUaeiou"
+
+for i in name:
+    if i in vowels:
+        count += 1
+print(f"Vowels: {count}")
+
+# To be continued.....
+
+# Exceptions
+"""
+- Try
+- Except 
+- Finally
+"""
+
+# Try
+
+#The try block does not raise any errors, so the else block is executed:
+
+try:
+  print("Hello")
+except:
+  print("Something went wrong")
+else:
+  print("Nothing went wrong")
+
+#The finally block gets executed no matter if the try block raises any errors or not:
+
+try:
+  print(x)
+except:
+  print("Something went wrong")
+finally:
+  print("The 'try except' is finished")
+
+
