@@ -667,3 +667,340 @@ while running:
 
     else:
         print("Invalid Choice!!")
+
+
+# we're gonna make something tonight 
+# Inventory Management System
+
+"""
+- im gonna do with this is im gonna make an inventory system where user can track his product and make a changes or something in it!
+- add product 
+- view product
+- search product
+- update product
+- delete product
+- sell product
+- low stock
+- exit
+"""
+
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame(columns = ['ID', 'Product', 'Price', 'Stock'])
+
+user_username = []
+user_passkey = []
+
+
+def login():
+    log_in = input("Already have an account? (Y/n) : ").strip()
+
+    if log_in == "Y" and log_in != "n":
+        passkey = input("Enter your passkey : ")
+
+        if passkey == "":
+            print("You haven't entered yet!! ")
+
+        elif len(passkey) != 4:
+            print("Passkey contains only a 4 digits!!")
+
+        elif not passkey.isdigit():
+            print("Passkey should be numbers!!")
+
+        elif passkey != user_passkey:
+            print("Invalid Passkey!!")
+
+        else:
+            print("Login Successfully!!")
+
+    else:
+        username = input("Enter your username : ")
+        passkey = input("Enter your passkey : ")
+
+        if username == "" and passkey == "":
+            print("You haven't entered yet, make sure to check it first!!")
+
+        elif username.isdigit():
+            print("Username must be letter/words!")
+
+        elif len(username) < 0 and len(username) > 14:
+            print("Username must be around 0 and 14 character's!")
+        
+        elif len(passkey) != 4:
+            print("Passkey contains only a 4 digits!!")
+
+        elif not passkey.isdigit():
+            print("Passkey should be numbers!!")
+
+        else:
+            user_username.append(username)
+            user_passkey.append(passkey)
+            print("Login Successfully!!")
+
+            print("\n===========YOUR ACCOUNT==========")
+            for i in user_username:
+                print(f"Username                       : {i}")
+            print()
+            for j in user_passkey:
+                print(f"Passkey                        : {j}")
+            print()
+            print("===================================")
+
+def add_product():
+    if not user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        print("\n================AVAILABLE PRODUCTS==================")
+        print(df.to_string())
+        print("======================================================")
+
+
+        add = input("Add some product? (Y/n) : ").strip()
+
+        if add != "Y" and add == "n":
+            print("Decline successfully!")
+
+        else:
+            while True:
+                adding_product = input("Enter the name of the product : ").strip()
+                adding_price = input("Enter the price of the product : ")
+                adding_stock = input("Enter how many stock : ")
+
+                if adding_product == "" and adding_price == "" and adding_stock == "":
+                    print("You haven't entered yet, make sure to check!!") 
+
+                elif adding_product.isdigit():
+                    print("Product name should be word!")
+
+                elif not adding_price.isdigit():
+                    print("Price Should be some number!!")
+
+                elif not adding_stock.isdigit():
+                    print("Stock should be a number, not words!")
+
+                else:
+                    df.loc[len(df)] = [len(df) + 1, adding_product, adding_price, adding_stock]
+                    print("Added Successfully!!")
+
+                    print("\n======YOUR ADEDD PRODUCT=====")
+                    print(df)
+                    print("===============================")
+
+                    again = input("Add again? (Y/n) : ").strip()
+
+                    if again != "Y" and again == "n":
+                        break
+
+                    else: 
+                        continue
+            
+
+def view_product():
+    if not user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        print("\n********************************************")
+        print("               AVAILABLE PRODUCT            ")
+        print("********************************************")
+        print(df)
+        print("********************************************")
+
+def search_product():
+    if user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        search = input("Search Product: ").strip()
+
+        if search in df['Product'].values:
+            product = df[df['Product'] == search]
+            print(product)
+
+        else:
+            print("Product not found!!")
+
+def update_product():
+    if not user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        print("\n********************************************")
+        print("                 YOUR PRODUCT               ")
+        print("********************************************")
+        print(df)
+        print("********************************************")
+
+        search = input("\n Enter a product to update : ").strip()
+
+        if search in df['Product'].values:
+
+            choose = input("What part to update (Price/Stock) : ").strip() .title()
+
+            if choose == "Price":
+                update_price = int(input("Enter new price : "))
+
+                df.loc[df['Product'] == search, "Price"] == update_price
+
+                print("Price Updated!!")
+
+            elif choose == "Stock":
+                update_stock = int(input("Enter a new stock : "))
+
+                df.loc[df["Product"] == search, "Stock"] == update_stock
+
+                print("Stock Updated!!")
+
+            else:
+                print("Invalid Choice!!")
+
+def delete_product():
+    if not user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        print("\n********************************************")
+        print("                 YOUR PRODUCT               ")
+        print("********************************************")
+        print(df)
+        print("********************************************")
+
+        delete_pro = input("\n Enter a product to delete : ")
+
+        if delete_pro in df["Product"].values:
+            again = input("You sure to delete this product? (Y/n) : ").strip() .title()
+
+            if again == "Y" and again != "n":
+                df.loc[df["Product"] != delete_pro]
+
+                print("Remove Successfully!!")
+
+            else:
+                print("Cancelled Successfully!!")
+
+        else:
+            print("Product not found!!")
+
+            print("\n********************************************")
+            print("                  YOUR PRODUCT              ")
+            print("********************************************")
+            print(df)
+            print("********************************************")
+
+def sell_product():
+    if not user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        print("\n********************************************")
+        print("                YOUR PRODUCT                ")
+        print("********************************************")
+        print(df)
+        print("********************************************")
+
+        sell = input("\nEnter a product to sell : ").strip()
+
+        if sell in df["Product"].values:
+            quantity = input("Enter how many you want to buy? ")
+
+            current_stock = df.loc[df["Product"] == sell, "Stock"].iloc[0]
+
+            if not quantity.isdigit():
+                print("Quantity is a count number!!")
+
+            elif quantity <= current_stock:
+                df.loc[df["Product"] == sell, "Stock"].iloc[0] -= quantity
+
+                print("Sale Successful!!")
+                print("Remaining Stock", current_stock - quantity)
+
+            else:
+                print("Not enough stock!!")
+
+        else:
+            print("Product not found!!")
+
+def low_stock():
+    if user_username and not user_passkey:
+        print("Login first!!")
+
+    else:
+        global df
+        lowstock_limit = 5
+
+        low_stock = df[df["Stock"] <= lowstock_limit]
+
+        if low_stock.empty:
+            print("No low-stock products!!")
+
+        else:
+            print("\n=======LOW STOCK PRODUCT=======")
+            print(low_stock)
+            print("=================================")
+
+def exit():
+    while True:
+        again = input("Exit? (Y'n) : ").strip() .title()
+
+        if again == "Y" and again != "n": 
+            print("Exiting the inventory.....")
+            break
+            
+
+running = True
+
+while running:
+    print("\n****************************************")
+    print('       INVENTORY MANAGEMENT SYSTEM      ')
+    print("****************************************")
+    print("1. Login")
+    print("2. Add Product")
+    print("3. View Product")
+    print("4. Search Product")
+    print("5. Update Product")
+    print("6. Delete Product")
+    print("7. Sell Product")
+    print("8. Low Stock")
+    print("9. Exit")
+    print("*****************************************")
+
+    choice = input("\nEnter your choice (1-9)  : ")
+
+    if choice == "1":
+        login()
+    
+    elif choice == "2":
+        add_product()
+
+    elif choice == "3":
+        view_product()
+
+    elif choice == "4":
+        search_product()
+
+    elif choice == "5":
+        update_product()
+
+    elif choice == "6":
+        delete_product()
+
+    elif choice == "7":
+        sell_product()
+
+    elif choice == "8":
+        low_stock()
+
+    elif choice == "9":
+        exit()
+        running = False
+
+    else:
+        print("Invalid Choice!!")
