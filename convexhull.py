@@ -34,3 +34,5 @@ for simplex in hull_points:
 
 plt.suptitle("CONVEXHULL", color = "r")
 plt.show()
+
+
